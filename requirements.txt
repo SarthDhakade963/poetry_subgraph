@@ -1,0 +1,12 @@
+# Core
+pydantic>=2.1.1
+
+langgraph>=0.1.0
+langsmith>=0.1.0
+
+google-generativeai>=0.0.2
+
+
+python-dotenv>=1.0.0
+
+typing-extensions>=4.7.1

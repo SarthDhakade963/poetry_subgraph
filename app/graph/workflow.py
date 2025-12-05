@@ -22,12 +22,19 @@ workflow.add_edge("tone_node", "final_composer")
 
 graph = workflow.compile(checkpointer=MemorySaver())
 
-# # ----------------------
-# # 2. Add LangSmith tracing
-# # ----------------------
+# ----------------------
+# 2. Add LangSmith tracing
+# ----------------------
 
 
-# @trace(name="poetry_workflow_run")
-# async def run_workflow(input_json):
-#     result = await graph.ainvoke({"video_json": input_json})
-#     return result
+async def run_workflow(input_json):
+    """
+    Run the poetry workflow with LangSmith tracing.
+    """
+    async with trace.context(name="poetry_workflow_run") as ts:
+        result = await graph.ainvoke(
+            {"video_json": input_json},
+            {"configurable": {"thread_id": "langsmith_test_1"}}
+        )
+        ts.log("final_result", result)
+    return result
