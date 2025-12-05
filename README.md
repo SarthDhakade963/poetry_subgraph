@@ -1,103 +1,102 @@
-Poetry Subgraph Workflow
+Here’s a clean and professional `README.md` version of your Poetry Subgraph Workflow project:
 
-This repository implements a Poetry Generation Workflow using LangGraph and LangSmith. It processes structured video input to generate poetry based on scene, human presence, and emotional vibes using Google Gemini LLM.
+````markdown
+# Poetry Subgraph Workflow
 
-Table of Contents
+This repository implements a **Poetry Generation Workflow** using **LangGraph** and **LangSmith**. It processes structured video input to generate poetry based on scene, human presence, and emotional vibes using the **Google Gemini LLM**.
 
-Features
+---
 
-Tech Stack
+## Table of Contents
 
-Installation
+- [Features](#features)  
+- [Tech Stack](#tech-stack)  
+- [Installation](#installation)  
+- [Setup](#setup)  
+- [Running the Workflow Locally](#running-the-workflow-locally)  
+- [Project Structure](#project-structure)  
+- [Contributing](#contributing)  
 
-Setup
+---
 
-Running the Workflow Locally
+## Features
 
-Project Structure
+- Extract context from a video scene (`context_node`)  
+- Analyze emotions (`emotion_node`)  
+- Analyze poem structure (`poem_analyzer`)  
+- Determine tone (`tone_node`)  
+- Compose final poem (`final_composer`)  
+- Local testing using LangGraph  
+- Optional tracing using LangSmith  
 
-Contributing
+---
 
-Features
+## Tech Stack
 
-Extract context from a video scene (context_node)
+- **Python 3.11+**  
+- **LangGraph** – Graph-based workflow orchestration  
+- **LangSmith** – Tracing and monitoring workflow runs  
+- **Google Gemini API** – LLM for content generation  
+- **Pydantic** – Data validation  
+- **asyncio** – Asynchronous execution  
 
-Analyze emotions (emotion_node)
+---
 
-Analyze poem structure (poem_analyzer)
-
-Determine tone (tone_node)
-
-Compose final poem (final_composer)
-
-Local testing using LangGraph
-
-Optional tracing using LangSmith
-
-Tech Stack
-
-Python 3.11+
-
-LangGraph – Graph-based workflow orchestration
-
-LangSmith – Tracing and monitoring workflow runs
-
-Google Gemini API – LLM for content generation
-
-Pydantic – Data validation
-
-asyncio – Asynchronous execution
-
-Installation
+## Installation
 
 Clone the repository:
 
+```bash
 git clone https://github.com/yourusername/poetry-subgraph.git
 cd poetry-subgraph
+````
 
+Create and activate a virtual environment:
 
-Create a virtual environment and activate:
-
+```bash
 conda create -n memevid python=3.11 -y
 conda activate memevid
-
+```
 
 Install dependencies:
 
+```bash
 pip install -r requirements.txt
+```
 
-Setup
+---
 
-Create a .env file in the root of the project:
+## Setup
 
+Create a `.env` file in the project root:
+
+```bash
 touch .env
+```
 
+Add your API keys:
 
-Add the required API keys:
-
+```env
 GOOGLE_API_KEY=your_google_gemini_api_key
 LANGCHAIN_API_KEY=your_langchain_api_key
-
-
+```
 Load environment variables:
 
-# For Windows (PowerShell)
-setx GOOGLE_API_KEY "your_google_gemini_api_key"
-setx LANGCHAIN_API_KEY "your_langchain_api_key"
+> ⚠️ **Important:** Do not commit your `.env` file to the repository.
 
-# For Unix / Mac
-export GOOGLE_API_KEY="your_google_gemini_api_key"
-export LANGCHAIN_API_KEY="your_langchain_api_key"
+---
 
-Running the Workflow Locally
+## Running the Workflow Locally
 
 Use the provided test runner:
 
-python -m app.langsmith
+```bash
+$ python -m app.tests.test_workflow_1
+```
 
+The `test_run` function uses a sample `video_json` input:
 
-The test_run function uses a sample video_json input, for example:
-
+```json
 {
   "scene": {
     "setting": "beach",
@@ -117,19 +116,27 @@ The test_run function uses a sample video_json input, for example:
     "energy_level": "low and soothing"
   }
 }
-
+```
 
 Workflow nodes run asynchronously:
 
+```
 context_node → emotion_node → poem_analyzer → tone_node → final_composer
+```
 
-Output will include the final poem in JSON format:
+Output includes the final poem in JSON format:
 
+```json
 {
   "final_poem": "Your generated poem here..."
 }
+```
 
-Project Structure
+---
+
+## Project Structure
+
+```
 poetry-subgraph/
 ├─ app/
 │  ├─ graph/
@@ -146,3 +153,7 @@ poetry-subgraph/
 │  └─ langsmith.py         # Local test runner & optional LangSmith tracing
 ├─ .env
 └─ requirements.txt
+```
+
+---
+
