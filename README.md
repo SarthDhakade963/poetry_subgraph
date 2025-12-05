@@ -1,6 +1,3 @@
-Here’s a clean and professional `README.md` version of your Poetry Subgraph Workflow project:
-
-````markdown
 # Poetry Subgraph Workflow
 
 This repository implements a **Poetry Generation Workflow** using **LangGraph** and **LangSmith**. It processes structured video input to generate poetry based on scene, human presence, and emotional vibes using the **Google Gemini LLM**.
