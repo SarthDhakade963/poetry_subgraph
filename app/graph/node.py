@@ -3,16 +3,18 @@ from app.services.compose_poem import compose_poem
 from app.services.extract_emotion import extract_emotion
 from app.graph.state import PoemState, VideoState
 from app.services.extract_context import extract_context
-import json
 
 from app.services.extract_tone import extract_tone
 
 
 async def context_node(state: PoemState):
     video_json = state["video_json"]
-    scene = video_json.get("scene", "")
-    human_presence = video_json.get("human_presence", "")
-    emotional_vibe = video_json.get("emotional_vibe", "")
+
+    general = video_json.get("general_attributes", {})
+
+    scene = general.get("scene", {})
+    human_presence = general.get("human_presence", {})
+    emotional_vibe = general.get("emotional_vibe", {})
 
     context_node = await extract_context(scene, human_presence, emotional_vibe)
 
@@ -26,8 +28,10 @@ async def context_node(state: PoemState):
 
 async def emotion_node(state: dict):
     video_json = state.get("video_json", {})
-    emotional_vibe = video_json.get("emotional_vibe", {})
-    human_presence = video_json.get("human_presence", {})
+    general = video_json.get("general_attributes", {})
+
+    emotional_vibe = general.get("emotional_vibe", {})
+    human_presence = general.get("human_presence", {})
 
     energy_level = emotional_vibe.get("energy_level", "")
     visible_emotions = human_presence.get("visible_emotions", [])
