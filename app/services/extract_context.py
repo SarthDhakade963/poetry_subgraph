@@ -12,9 +12,9 @@ async def extract_context(scene: dict, human_presence: dict, emotional_vibe: dic
     """
 
     prompt = CONTEXT_NODE_PROMPT.format(
-        scene=json.dumps(scene, indent=2),
-        human_presence=json.dumps(human_presence, indent=2),
-        emotional_vibe=json.dumps(emotional_vibe, indent=2)
+        scene=json.dumps(scene.model_dump(), indent=2),
+        human_presence=json.dumps(human_presence.model_dump(), indent=2),
+        emotional_vibe=json.dumps(emotional_vibe.model_dump(), indent=2)
     )
 
     raw = await asyncio.to_thread(_generate, prompt)
